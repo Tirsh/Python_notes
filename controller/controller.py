@@ -1,11 +1,10 @@
-from model.note import Note
-from repository.data_collector import DataCollector
-from settings.settings import DATA_FILE
+from controller.arg_parser import ArgParser
 
 
 class Controller:
     def __init__(self, args):
-        self.collector = DataCollector(DATA_FILE)
+        self.args = args
+        self.arg_parser = ArgParser(self.args)
 
     def run(self):
-        pass
+        self.arg_parser.action()

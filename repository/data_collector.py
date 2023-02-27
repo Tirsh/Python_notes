@@ -43,11 +43,11 @@ class DataCollector:
         self.data[DataCollector.id_counter] = note
 
     def edit(self, item_id, note):
-        if item_id in note:
+        if item_id in self.data:
             self.data[item_id] = note
-            return True
+            return note
         else:
-            return False
+            return None
 
     def delete(self, item_id):
         if item_id in self.data:
