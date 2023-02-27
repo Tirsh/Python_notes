@@ -1,7 +1,7 @@
 from model.note import Note
 from repository.data_collector import DataCollector
 from settings.settings import DATA_FILE
-from ui.console_interface import show_info, show_all, show_one
+from ui.console_interface import *
 
 
 class Service:
@@ -19,6 +19,8 @@ class Service:
             result = self.collector.get_by_id(int(args[0]))
             if result:
                 show_one(result)
+            else:
+                does_not_exist()
         else:
             self.help_info()
 
@@ -30,12 +32,15 @@ class Service:
             result = self.collector.edit(int(args[0]), Note(args[1], args[2]))
             if result:
                 show_one(result)
+            else:
+                does_not_exist()
         else:
             self.help_info()
 
     def delete_item(self, *args):
         if type(args[0].isdigit()):
-            self.collector.delete(int(args[0]))
+            if not self.collector.delete(int(args[0])):
+                does_not_exist()
         else:
             self.help_info()
 
